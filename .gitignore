@@ -1,0 +1,5 @@
+venv
+data
+.idea
+.env
+todo.txt
