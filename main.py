@@ -1,20 +1,15 @@
-import os
-import time
-from watchdog.observers import Observer
-
 from config import Config
-from handler import PhotoHandler
+from exceptions import UserNotFoundError
+from tg import TGClient
 
 if __name__ == '__main__':
-    os.makedirs(Config.PHOTO_DIR, exist_ok=True)
-    observer = Observer()
-    observer.schedule(PhotoHandler(), path=Config.PHOTO_DIR, recursive=False)
-    observer.start()
-    print(f"Ожидание новых фото в папке: {Config.PHOTO_DIR}")
+    # region input
+    PHOTO_DIR = "photo"
+    SOME_USER_INFO = "Theones777"
+    # endregion
 
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    tg_client = TGClient(Config.BOT_TOKEN)
+    if chat_id := tg_client.get_user_chat_id(f"@{SOME_USER_INFO}"):
+        tg_client.send_to_telegram(chat_id, PHOTO_DIR)
+    else:
+        raise UserNotFoundError()

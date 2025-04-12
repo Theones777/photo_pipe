@@ -1,5 +1,10 @@
+from os import getenv
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 class Config:
-    PHOTO_DIR = './photos'
-    PROCESSED_PATH = './processed.jpg'
-    BOT_TOKEN = 'YOUR_BOT_TOKEN'
-    CHAT_ID = 'YOUR_CHAT_ID'
+    BOT_TOKEN = getenv("BOT_TOKEN")
+    JSON_NAME = "chat_ids.json"
