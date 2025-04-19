@@ -5,3 +5,6 @@ data
 todo.txt
 photo
 *.json
+*.spec
+build
+dist
