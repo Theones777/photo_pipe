@@ -1,0 +1,31 @@
+name: Build macOS App
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Установка Python и зависимостей
+      run: |
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install --upgrade pip
+        pip install pyinstaller -r requirements.txt
+
+    - name: Сборка .app файла
+      run: |
+        source venv/bin/activate
+        pyinstaller --onefile --windowed main.py
+
+    - name: Загрузка артефактов
+      uses: actions/upload-artifact@v3
+      with:
+        name: telegram-sender-macos
+        path: dist/main
