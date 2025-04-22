@@ -25,10 +25,10 @@ jobs:
         pyinstaller --onefile --windowed main.py
 
     - name: Листинг dist
-      run: ls -lh dist
+      run: ls -la dist
 
     - name: Загрузка артефактов
       uses: actions/upload-pages-artifact@v3
       with:
         name: telegram-sender-macos
-        path: dist/*
+        path: dist
