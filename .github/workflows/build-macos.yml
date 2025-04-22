@@ -24,8 +24,11 @@ jobs:
         source venv/bin/activate
         pyinstaller --onefile --windowed main.py
 
+    - name: Листинг dist
+      run: ls -lh dist
+
     - name: Загрузка артефактов
       uses: actions/upload-pages-artifact@v3
       with:
         name: telegram-sender-macos
-        path: dist/main
+        path: dist/*
