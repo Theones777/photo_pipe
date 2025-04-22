@@ -25,7 +25,7 @@ jobs:
         pyinstaller --onefile --windowed main.py
 
     - name: Загрузка артефактов
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-pages-artifact@v3
       with:
         name: telegram-sender-macos
         path: dist/main
